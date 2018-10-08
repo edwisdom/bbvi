@@ -119,6 +119,14 @@ My approach was a little brute-force, as I tried a number of combinations of lea
 <br />
 <br />
 <br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 Figure 8: Estimated loss function over iterations for 3 chains of variational inference
 <br />
 <br />
@@ -140,43 +148,21 @@ Figure 9: 10 samples from the posterior and a plot of uncertainty (2 std.) for 3
 <br />
 <br />
 
-<!-- ### Posterior Shapes
+### Comparison to Hamiltonian Monte Carlo
 
-<img align="left" width="275" height="300" src="https://github.com/edwisdom/bnn-hmc/blob/master/bnn_posterior_1.png">
-<img align="left" width="275" height="300" src="https://github.com/edwisdom/bnn-hmc/blob/master/bnn_posterior_1.png">
-<img align="left" width="275" height="300" src="https://github.com/edwisdom/bnn-hmc/blob/master/bnn_posterior_1.png">
-
-Figure 6: 10 samples from 3 different BNN posteriors sampled using HMC with epsilon=0.001 and L=25
+Compared to the [Hamiltonian Monte Carlo technique](https://github.com/edwisdom/bnn-hmc), variational inference does not fit the data as well. This is somewhat strange, especially considering we're approximating normally distributed data, so our choice of a normal distribution as our density family should make this easier. Moreover, the results are very unstable, in a way that they were not for Hamiltonian Monte Carlo, where the right choice of leapfrog steps and learning rate would usually guarantee a good posterior sample. Here, even with the right hyperparameters, a bad initialization can severely hamper variational inference. 
 
 
-As we can see in Figure 6, each of the posterior samples wraps tightly around the training data. However, the predictions that are significantly further away from any training data are much more variable. 
-
-
-### Uncertainty and the Deficiency of Point Estimates
-
-<img align="left" width="600" height="600" src="https://github.com/edwisdom/bnn-hmc/blob/master/posterior_samples.png">
-
-**Figure 7**: 500 posterior function samples from a single BNN posterior trained with epsilon=0.001 and L=25
-
-Figure 7 shows how our posterior has much greater uncertainty at input points that are far away from its training data. Its estimates of these values are largely dominated by the prior. This kind of model gives us an edge over traditional point-estimate neural networks because they give a distribution over our parameters and allow us to quantify our certainty about predictions. These models have the potential to be both more interpretable and more capable of [detecting adversarial perturbations](https://arxiv.org/abs/1711.08244).
-
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-
+The value added with black-box variational inference is that it can be used with any complex model we want, even ones that aren't differentiable. This isn't, of course, possible with Hamiltonian Monte Carlo. However, these results make me skeptical of the claim that black-box variational inference can practically, not theoretically, be used with any model. With how noisy its gradient estimates are, my guess is that models more complex than our single-hidden layer neural network might make it necessary to take a lot more Monte Carlo gradient samples to make variational inference work. 
 
 ## Future Work
 
 In the future, I would like to explore the following:
 
-1. Tuning hyperparameters epsilon and L more exhaustively and systematically
+1. Varying the learning rates using the Robbins-Munro sequence
 2. Applying this model to real-world data and comparing it to neural networks that take similar time to train
-3. Implementing the [NUTS](https://arxiv.org/abs/1111.4246) (No U-Turn Sampler), which is currently the best known Monte Carlo sampling technique for Bayesian neural nets
+3. Using a different density family (Gaussian scale mixtures) for the approximating distribution
 
 ## Credits
 
-A huge thanks to Prof. Michael Hughes, who supervised this work, and Daniel Dinjian and Julie Jiang for thinking through the technical nitty-gritty with me. -->
+A huge thanks to Prof. Michael Hughes, who supervised this work, Daniel Dinjian, who thought through architectures with me in the early phases, and Ramtin Hosseini, who sat with me to think about bugs that could lead to small gradient norms. 
