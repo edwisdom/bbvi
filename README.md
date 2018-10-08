@@ -69,7 +69,13 @@ The second column provides gradients that seem reasonable given the loss functio
 <img align="left" width="275" height="300" src="https://github.com/edwisdom/bbvi/blob/master/fitted_posterior_14.png">
 <br />
 <br />
+<br />
+<br />
 Figure 5: Losses and Fitted Posteriors for Learning Rate 5e-6
+<br />
+<br />
+<br />
+<br />
 <img align="left" width="275" height="300" src="https://github.com/edwisdom/bbvi/blob/master/loss_over_iters_3.png">
 <img align="left" width="275" height="300" src="https://github.com/edwisdom/bbvi/blob/master/loss_over_iters_9.png">
 <img align="left" width="275" height="300" src="https://github.com/edwisdom/bbvi/blob/master/loss_over_iters_15.png">
@@ -80,7 +86,13 @@ Figure 5: Losses and Fitted Posteriors for Learning Rate 5e-6
 <img align="left" width="275" height="300" src="https://github.com/edwisdom/bbvi/blob/master/fitted_posterior_16.png">
 <br />
 <br />
+<br />
+<br />
 Figure 6: Losses and Fitted Posteriors for Learning Rate 1e-5
+<br />
+<br />
+<br />
+<br />
 <img align="left" width="275" height="300" src="https://github.com/edwisdom/bbvi/blob/master/loss_over_iters_5.png">
 <img align="left" width="275" height="300" src="https://github.com/edwisdom/bbvi/blob/master/loss_over_iters_11.png">
 <img align="left" width="275" height="300" src="https://github.com/edwisdom/bbvi/blob/master/loss_over_iters_17.png">
@@ -91,13 +103,42 @@ Figure 6: Losses and Fitted Posteriors for Learning Rate 1e-5
 <img align="left" width="275" height="300" src="https://github.com/edwisdom/bbvi/blob/master/fitted_posterior_18.png">
 <br />
 <br />
+<br />
+<br />
 Figure 7: Losses and Fitted Posteriors for Learning Rate 5e-5
-
-My approach was a little brute-force, as I tried a number of combinations of learning rates and MC samples. I found that the higher learning rate, 5e-5, produced the best results, and as expected, more samples also improved performance. Of course, taking more samples incurs a higher computational cost, so I limited that number to 150. In order to experiment with a higher learning rate, I also quickly tried 1e-4 and found that it worked even better, so I stuck with that for the following experiments.
+<br />
+<br />
+<br />
+<br />
+My approach was a little brute-force, as I tried a number of combinations of learning rates and MC samples. I found that the higher learning rate, 5e-5, produced the best results, and as expected, more samples also improved performance. Of course, taking more samples incurs a higher computational cost, so I limited that number to 500. I stuck with these two values for the hyperparameters for the following experiments.
 
 ## Results of Black-Box Variational Inference 
 
-<img align="left" width="275" height="300" src="https://github.com/edwisdom/bbvi/blob/master/final_losses_7.png">
+<img align="left" width="700" height="500" src="https://github.com/edwisdom/bbvi/blob/master/final_losses_7.png">
+<br />
+<br />
+<br />
+<br />
+Figure 8: Estimated loss function over iterations for 3 chains of variational inference
+<br />
+<br />
+<br />
+<br />
+<img align="left" width="425" height="425" src="https://github.com/edwisdom/bbvi/blob/master/final_posterior_1.png">
+<img align="left" width="425" height="425" src="https://github.com/edwisdom/bbvi/blob/master/final_uncertainty_2.png">
+<img align="left" width="425" height="425" src="https://github.com/edwisdom/bbvi/blob/master/final_posterior_3.png">
+<img align="left" width="425" height="425" src="https://github.com/edwisdom/bbvi/blob/master/final_uncertainty_4.png">
+<img align="left" width="425" height="425" src="https://github.com/edwisdom/bbvi/blob/master/final_posterior_5.png">
+<img align="left" width="425" height="425" src="https://github.com/edwisdom/bbvi/blob/master/final_uncertainty_6.png">
+<br />
+<br />
+<br />
+<br />
+Figure 9: 10 samples from the posterior and a plot of uncertainty (2 std.) for 3 VI chains with learning rate 5e-5 and 500 gradient samples
+<br />
+<br />
+<br />
+<br />
 
 <!-- ### Posterior Shapes
 
