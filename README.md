@@ -23,18 +23,30 @@ python bbvi.py
 ```
 
 
-## Sampling from a Bayesian Neural Net Prior
+## Monte Carlo Estimations Using Score Function Trick
 
 
 <img align="left" width="420" height="420" src="https://github.com/edwisdom/bbvi/blob/master/bbvi_loss_1.png">
 <img align="left" width="420" height="420" src="https://github.com/edwisdom/bbvi/blob/master/bbvi_grad_1.png">
+Figure 1: Variational loss function and its gradient with 1 MC sample
 <img align="left" width="420" height="420" src="https://github.com/edwisdom/bbvi/blob/master/bbvi_loss_2.png">
 <img align="left" width="420" height="420" src="https://github.com/edwisdom/bbvi/blob/master/bbvi_grad_2.png">
+Figure 2: Variational loss function and its gradient with 10 MC samples
 <img align="left" width="420" height="420" src="https://github.com/edwisdom/bbvi/blob/master/bbvi_loss_3.png">
 <img align="left" width="420" height="420" src="https://github.com/edwisdom/bbvi/blob/master/bbvi_grad_3.png">
+Figure 3: Variational loss function and its gradient with 100 MC samples
 <img align="left" width="420" height="420" src="https://github.com/edwisdom/bbvi/blob/master/bbvi_loss_4.png">
 <img align="left" width="420" height="420" src="https://github.com/edwisdom/bbvi/blob/master/bbvi_grad_4.png">
+Figure 4: Variational loss function and its gradient with 1000 MC samples
 
+
+### Accuracy of Monte Carlo Loss Estimates
+
+As the first columns of Figures 1-4 show, as the number of samples increase, the loss function estimate becomes smoother and more accurate. The results make sense, since the ideal value of the mean-weight parameter should be 1, and since a linear regression model should have a quadratic loss function. The 1-sample loss is noisy, but on the whole, fairly accurate in its shape. The minimum is still at 1, and overall, it still looks like a parabola, even if it's a bit noisy. 
+
+### Accuracy of Monte Carlo Gradient Estimates
+
+The second column provides gradients that seem reasonable given the loss function from the first column. They are mostly linear with a positive slope, which makes sense as the derivative of the parabolas of loss. Note that as the number of samples increases, like before, the gradient becomes less noisy. However, in this case, the 1-sample estimates are not really accurate, especially as we deviate far from the optimal value of the mean. Moreover, the basic upward linear slope is not even preserved. This remains true for 10 Monte Carlo samples, though once we take 100 or 1000 MC samples, the gradient becomes more clearly correct. Curiously, even 1000 MC samples produces somewhat noisy gradients at mean values that are far from optimal.
 
 <!-- ### Qualitative Trends in the Prior
 
