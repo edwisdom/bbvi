@@ -29,50 +29,77 @@ python bbvi.py
 <img align="left" width="420" height="420" src="https://github.com/edwisdom/bbvi/blob/master/bbvi_loss_1.png">
 <img align="left" width="420" height="420" src="https://github.com/edwisdom/bbvi/blob/master/bbvi_grad_1.png">
 Figure 1: Variational loss function and its gradient with 1 MC sample
+<br />
+<br />
 <img align="left" width="420" height="420" src="https://github.com/edwisdom/bbvi/blob/master/bbvi_loss_2.png">
 <img align="left" width="420" height="420" src="https://github.com/edwisdom/bbvi/blob/master/bbvi_grad_2.png">
 Figure 2: Variational loss function and its gradient with 10 MC samples
+<br />
+<br />
 <img align="left" width="420" height="420" src="https://github.com/edwisdom/bbvi/blob/master/bbvi_loss_3.png">
 <img align="left" width="420" height="420" src="https://github.com/edwisdom/bbvi/blob/master/bbvi_grad_3.png">
 Figure 3: Variational loss function and its gradient with 100 MC samples
+<br />
+<br />
 <img align="left" width="420" height="420" src="https://github.com/edwisdom/bbvi/blob/master/bbvi_loss_4.png">
 <img align="left" width="420" height="420" src="https://github.com/edwisdom/bbvi/blob/master/bbvi_grad_4.png">
 Figure 4: Variational loss function and its gradient with 1000 MC samples
-
+<br />
+<br />
 
 ### Accuracy of Monte Carlo Loss Estimates
 
 As the first columns of Figures 1-4 show, as the number of samples increase, the loss function estimate becomes smoother and more accurate. The results make sense, since the ideal value of the mean-weight parameter should be 1, and since a linear regression model should have a quadratic loss function. The 1-sample loss is noisy, but on the whole, fairly accurate in its shape. The minimum is still at 1, and overall, it still looks like a parabola, even if it's a bit noisy. 
 
+
 ### Accuracy of Monte Carlo Gradient Estimates
 
 The second column provides gradients that seem reasonable given the loss function from the first column. They are mostly linear with a positive slope, which makes sense as the derivative of the parabolas of loss. Note that as the number of samples increases, like before, the gradient becomes less noisy. However, in this case, the 1-sample estimates are not really accurate, especially as we deviate far from the optimal value of the mean. Moreover, the basic upward linear slope is not even preserved. This remains true for 10 Monte Carlo samples, though once we take 100 or 1000 MC samples, the gradient becomes more clearly correct. Curiously, even 1000 MC samples produces somewhat noisy gradients at mean values that are far from optimal.
 
-<!-- ### Qualitative Trends in the Prior
 
-The samples from the prior, as Figure 1 shows, clearly depend heavily on the choice of activation functions. Whereas the relu prior samples are essentially two piecewise lines, the tanh prior samples look like sigmoid curves (which reflects the underlying activation functions). 
+## Hyperparameter Tuning
 
-Although these activation functions are simple, even with just one hidden layer of 2 units, different priors have a large range at each possible input value (except the relu activation at x=0, predictably so). This suggests that our priors are fairly flexible, and can fit a lot of different training data. Another clear trend is that with more hidden layers, individual prior samples become more complex with more local extrema. 
-
-## Sampling from a Bayesian Neural Net Posterior with Hamiltonian Monte Carlo
-
-### Convergence
-
-<img align="left" width="600" height="600" src="https://github.com/edwisdom/bnn-hmc/blob/master/potential_energies.png">
-
-**Figure 5**: Potential energies over Hamiltonian Monte Carlo iterations for 3 different chains
-
-As we see in Figure 5, each of the chains of Hamiltonian Monte Carlo rapidly converge to low potential energy values, which means that the samples we're getting are from high probability-mass regions of the posterior. This is the primary reason why Hamiltonian Monte Carlo is preferred over Metropolis-style (MCMC) methods, since the latter is unlikely to explore a wide space while still remaining in high-probability regions. 
-
-To see an interactive demo of this principle, [see here](https://chi-feng.github.io/mcmc-demo/app.html#HamiltonianMC,banana).
-
+<img align="left" width="275" height="300" src="https://github.com/edwisdom/bbvi/blob/master/loss_over_iters_1.png">
+<img align="left" width="275" height="300" src="https://github.com/edwisdom/bbvi/blob/master/loss_over_iters_7.png">
+<img align="left" width="275" height="300" src="https://github.com/edwisdom/bbvi/blob/master/loss_over_iters_13.png">
 <br />
 <br />
+<img align="left" width="275" height="300" src="https://github.com/edwisdom/bbvi/blob/master/fitted_posterior_2.png">
+<img align="left" width="275" height="300" src="https://github.com/edwisdom/bbvi/blob/master/fitted_posterior_8.png">
+<img align="left" width="275" height="300" src="https://github.com/edwisdom/bbvi/blob/master/fitted_posterior_14.png">
 <br />
 <br />
+Figure 5: Losses and Fitted Posteriors for Learning Rate 5e-6
+<img align="left" width="275" height="300" src="https://github.com/edwisdom/bbvi/blob/master/loss_over_iters_3.png">
+<img align="left" width="275" height="300" src="https://github.com/edwisdom/bbvi/blob/master/loss_over_iters_9.png">
+<img align="left" width="275" height="300" src="https://github.com/edwisdom/bbvi/blob/master/loss_over_iters_15.png">
 <br />
+<br />
+<img align="left" width="275" height="300" src="https://github.com/edwisdom/bbvi/blob/master/fitted_posterior_4.png">
+<img align="left" width="275" height="300" src="https://github.com/edwisdom/bbvi/blob/master/fitted_posterior_10.png">
+<img align="left" width="275" height="300" src="https://github.com/edwisdom/bbvi/blob/master/fitted_posterior_16.png">
+<br />
+<br />
+Figure 6: Losses and Fitted Posteriors for Learning Rate 1e-5
+<img align="left" width="275" height="300" src="https://github.com/edwisdom/bbvi/blob/master/loss_over_iters_5.png">
+<img align="left" width="275" height="300" src="https://github.com/edwisdom/bbvi/blob/master/loss_over_iters_11.png">
+<img align="left" width="275" height="300" src="https://github.com/edwisdom/bbvi/blob/master/loss_over_iters_17.png">
+<br />
+<br />
+<img align="left" width="275" height="300" src="https://github.com/edwisdom/bbvi/blob/master/fitted_posterior_6.png">
+<img align="left" width="275" height="300" src="https://github.com/edwisdom/bbvi/blob/master/fitted_posterior_12.png">
+<img align="left" width="275" height="300" src="https://github.com/edwisdom/bbvi/blob/master/fitted_posterior_18.png">
+<br />
+<br />
+Figure 7: Losses and Fitted Posteriors for Learning Rate 5e-5
 
-### Posterior Shapes
+My approach was a little brute-force, as I tried a number of combinations of learning rates and MC samples. I found that the higher learning rate, 5e-5, produced the best results, and as expected, more samples also improved performance. Of course, taking more samples incurs a higher computational cost, so I limited that number to 150. In order to experiment with a higher learning rate, I also quickly tried 1e-4 and found that it worked even better, so I stuck with that for the following experiments.
+
+## Results of Black-Box Variational Inference 
+
+<img align="left" width="275" height="300" src="https://github.com/edwisdom/bbvi/blob/master/final_losses_7.png">
+
+<!-- ### Posterior Shapes
 
 <img align="left" width="275" height="300" src="https://github.com/edwisdom/bnn-hmc/blob/master/bnn_posterior_1.png">
 <img align="left" width="275" height="300" src="https://github.com/edwisdom/bnn-hmc/blob/master/bnn_posterior_1.png">
