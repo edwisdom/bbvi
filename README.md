@@ -145,13 +145,12 @@ Figure 8: Estimated loss function over iterations for 3 chains of variational in
 Figure 9: 10 samples from the posterior and a plot of uncertainty (2 std.) for 3 VI chains with learning rate 5e-5 and 500 gradient samples
 <br />
 <br />
-<br />
-<br />
 
 ### Comparison to Hamiltonian Monte Carlo
 
-Compared to the [Hamiltonian Monte Carlo technique](https://github.com/edwisdom/bnn-hmc), variational inference does not fit the data as well. This is somewhat strange, especially considering we're approximating normally distributed data, so our choice of a normal distribution as our density family should make this easier. Moreover, the results are very unstable, in a way that they were not for Hamiltonian Monte Carlo, where the right choice of leapfrog steps and learning rate would usually guarantee a good posterior sample. Here, even with the right hyperparameters, a bad initialization can severely hamper variational inference. 
+Compared to the [Hamiltonian Monte Carlo technique](https://github.com/edwisdom/bnn-hmc), variational inference does not fit the data as well. This is somewhat strange, especially considering we're approximating normally distributed data, so our choice of a normal distribution as our density family should make this easier. 
 
+Moreover, the results are very unstable, in a way that they were not for Hamiltonian Monte Carlo, where the right choice of leapfrog steps and learning rate would usually guarantee a good posterior sample. Here, even with the right hyperparameters, a bad initialization can severely hamper variational inference. At the same time, variational inference severely underestimates the variance of the posterior; whereas HMC would give large uncertainty estimates far away from data, variational inference does not, thereby weakening the strongest advantage of the Bayesian approach.
 
 The value added with black-box variational inference is that it can be used with any complex model we want, even ones that aren't differentiable. This isn't, of course, possible with Hamiltonian Monte Carlo. However, these results make me skeptical of the claim that black-box variational inference can practically, not theoretically, be used with any model. With how noisy its gradient estimates are, my guess is that models more complex than our single-hidden layer neural network might make it necessary to take a lot more Monte Carlo gradient samples to make variational inference work. 
 
